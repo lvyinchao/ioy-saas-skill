@@ -2,7 +2,7 @@
 
 An Agent Skill for building an independent Cloudflare AI SaaS using [ioy.ai](https://ioy.ai). Includes an eight-part intake, asset specifications, launch checks, and a bridge to the template's project generator.
 
-**This Skill is public. The SaaS template remains private. Installation does not include template source or grant repository access. You need an authorized local template copy.** The MIT license applies only to files in this public repository; it does not relicense the template or its licensed dependencies/assets.
+**This Skill is public. The SaaS template repository remains private. Sign in to ioy.ai to get a read-only template clone credential; no GitHub account is needed.** Installing the Skill itself does not download template source. The MIT license applies only to files in this public repository; it does not relicense the template or its licensed dependencies/assets.
 
 ## 1. Install in Codex
 
@@ -18,7 +18,15 @@ The tested installer places this Skill in the shared `~/.agents/skills/ioy-saas`
 
 ## 2. Prepare your template
 
-Use a local copy you are entitled to use. Existing collaborators can clone the private template with their own GitHub authorization. If you do not have access, contact **c@ioy.ai**; installing this Skill does not bypass that prerequisite.
+Open [Get the template](https://ioy.ai/app/template), sign in to ioy.ai, and click **Create clone credential**. Your verified account includes read-only access. Run in your own terminal:
+
+```sh
+git -c credential.helper= clone https://ioy.ai/template.git ioy-template
+```
+
+When Git asks, enter username `ioy` and paste the temporary credential as the password (not your Google password). It expires after one hour, is shown once, and can be revoked on the template page. Creating another credential replaces the old one. Do not paste it into chat, URLs, screenshots or Git. Disabling the credential helper for this command avoids persisting it in Git's credential store.
+
+The URL serves a sanitized release of the private GitHub project through authenticated, read-only Git HTTP. It does not grant write access to the original GitHub repository, include its original history/production configuration, or require a GitHub account. Existing GitHub collaborators can still use their authorized repository access. For support, contact **c@ioy.ai**.
 
 Give Codex the template path, or set `SAAS_TEMPLATE` in the environment used to launch Codex. Never place service keys in a prompt or requirements file.
 
@@ -58,13 +66,13 @@ The example includes `.example` addresses, text workflow, Waffo, API enabled, 30
 
 ## 中文：第一次使用
 
-1. 准备 Node.js 22.20+、Git，以及有权使用的模板本地副本。没有模板访问权限时联系 c@ioy.ai。
+1. 准备 Node.js 22.20+、Git。登录 [ioy.ai 领取页](https://ioy.ai/app/template)，创建一小时有效的只读 clone 凭证；无需 GitHub 账号。按上面的 clone 命令下载，用户名填 `ioy`，密码填临时凭证，不是 Google 密码。
 2. 运行上面的一行安装命令，然后重新打开 Codex 或开始新会话。
 3. 输入 `$ioy-saas`，说明产品用途、模板路径和新项目的空目录；Codex 会补齐八类关键需求。
 4. Skill 调用本地模板生成独立项目。按生成项目的 README 安装依赖、初始化本地密钥和数据库，启动并检查页面及实际结果。
 5. 在环境变量或 Cloudflare Secrets 中配置自己的 Google、邮件、模型、支付和分析服务，完成测试环境验收后再发布。不要把 key 写进聊天、需求文件、Skill 或 Git。
 
-模板参数、服务 key、回调地址和部署步骤见[配置文档](https://ioy.ai/docs/configuration)。安装 Skill 不等于下载私有源码，也不等于完成生产上线。公开仓库不包含模板源码、生产资源 ID、运行数据、密钥或模板 Git 历史。
+模板参数、服务 key、回调地址和部署步骤见[配置文档](https://ioy.ai/docs/configuration)。安装 Skill 后通过 ioy.ai 登录领取私有模板副本，再生成独立产品；安装不等于完成生产上线。公开仓库不包含模板源码、生产资源 ID、运行数据、密钥或模板 Git 历史。临时 clone 凭证也不要粘贴到聊天或写入文件。
 
 ## Validate this package
 

@@ -5,11 +5,13 @@ description: Build an independent Cloudflare AI SaaS from an authorized local io
 
 # ioy SaaS
 
-Use Chinese operator instructions when appropriate; generated product content defaults to English. This public Skill supplies a workflow and generator bridge, not access to the private template.
+Use Chinese operator instructions when appropriate; generated product content defaults to English. This public Skill supplies a workflow and generator bridge. A verified ioy.ai account can obtain a private template release through read-only authenticated cloning; no GitHub account is required.
 
 ## Locate the template
 
-Use the user-provided path, `SAAS_TEMPLATE`, or a template in the current directory. Run `node <skill-directory>/scripts/create-project.mjs --template <template-directory> --check`. This checks files, not license entitlement. Read that template's README and `docs/launch.md` for current commands and configuration. If no authorized copy is available, explain the missing prerequisite and ask for its location; do not represent a generic replacement as the ioy template.
+Use the user-provided path, `SAAS_TEMPLATE`, or a template in the current directory. Run `node <skill-directory>/scripts/create-project.mjs --template <template-directory> --check`. This checks files, not license entitlement. Read that template's README and `docs/launch.md` for current commands and configuration.
+
+If the user has no copy, direct them to `https://ioy.ai/app/template`. They sign in, create a one-hour clone credential and run `git -c credential.helper= clone https://ioy.ai/template.git ioy-template` in their own terminal (username `ioy`, temporary credential as password). Never ask them to paste that credential into chat or a URL. The endpoint is a read-only sanitized release mirror; it does not add GitHub collaborators or expose original history/production configuration. Resume generation from their cloned directory. Do not represent a generic replacement as the ioy template.
 
 ## Collect and generate
 
