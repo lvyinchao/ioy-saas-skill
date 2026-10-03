@@ -1,0 +1,18 @@
+{
+  "id": "first-draft",
+  "name": "First Draft",
+  "tagline": "Turn a useful brief into a first draft.",
+  "description": "An AI writing workspace for independent creators.",
+  "domain": "https://first-draft.example",
+  "supportEmail": "support@first-draft.example",
+  "features": ["text"],
+  "billingProvider": "waffo",
+  "apiEnabled": true,
+  "retentionDays": 30,
+  "locales": ["en"],
+  "audience": "Independent creators",
+  "workflow": "Describe a brief, create a draft, review and export.",
+  "inputOutput": "Text brief to text draft",
+  "model": "OpenAI-compatible provider; keys configured separately",
+  "dataPolicy": "Keep task results for 30 days; private downloads."
+}

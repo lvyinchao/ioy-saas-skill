@@ -1,0 +1,13 @@
+node_modules/
+.DS_Store
+.env*
+.dev.vars*
+template-location.json
+requirements.local.json
+ioy-template/
+generated/
+output/
+*.pem
+*.key
+*.p12
+*.pfx
