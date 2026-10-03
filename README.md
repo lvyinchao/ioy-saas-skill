@@ -14,6 +14,8 @@ npx --yes skills@1.7.0 add lvyinchao/ioy-saas-skill -s ioy-saas -a codex -g -y
 
 This uses the MIT-licensed [Vercel skills CLI](https://github.com/vercel-labs/skills), pinned to the tested installer version. `-s` selects the Skill, `-a codex` selects Codex, `-g` installs globally, and `-y` skips installer prompts. Reopen Codex/start a new session to load the Skill. Other supported agents can use their own `-a` identifier.
 
+The tested installer places this Skill in the shared `~/.agents/skills/ioy-saas` directory supported by Codex. This location is not changed by `CODEX_HOME`. To install only for a project, run the command in that project and omit `-g`. Check discovery with `npx --yes skills@1.7.0 list -a codex -g`.
+
 ## 2. Prepare your template
 
 Use a local copy you are entitled to use. Existing collaborators can clone the private template with their own GitHub authorization. If you do not have access, contact **c@ioy.ai**; installing this Skill does not bypass that prerequisite.
