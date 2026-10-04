@@ -12,3 +12,5 @@ Reuse answers already supplied. Ask a small group of missing questions at a time
 8. **Operations / 上线信息**: domain, support email, data retention/deletion, Cloudflare ownership and required service readiness.
 
 Defaults: Cloudflare React Router SSR, Workers, D1, R2, Workflows; subscriptions plus credits; file-based docs and Blog. Verify supported fields against the installed template. Save non-secret answers in a requirements file. Service keys belong in ignored environment files or Cloudflare Secrets.
+
+For a focused one-page tool, choose `layout: "one-page"` in the workflow area, exactly one enabled module, and optional `onePage` input/result labels. See [one-page.md](one-page.md). Standard layout remains the default.

@@ -85,3 +85,7 @@ Tests use isolated temporary fixtures and do not contact providers or deploy any
 ## Automatic sitemap maintenance
 
 Generated projects include `/sitemap` and `/sitemap.xml`, both driven by `app/core/public-pages.ts`. Published Markdown/MDX enters automatically on content build; edited update dates, removed files, drafts and noindex flags update the inventory. Add simple code pages once in `app/core/policies.ts` or register custom React views in `staticPublicPages()` with their route implementation. Run `npm run content:build` and `npm run sitemap:check`; production builds run both. See the Skill [content workflow](skills/ioy-saas/references/content.md) and [website guide](https://ioy.ai/docs/sitemap). This requires template 1.1.1 or newer.
+
+## One-page SaaS
+
+支持围绕新词或单个需求创建极简工具。需求设 `layout: "one-page"`，只启用一个模块；输入、结果、账户、定价、About、Contact 和政策留在首页。参考 [单页工作流](skills/ioy-saas/references/one-page.md)，实施由授权的模板生成器提供。密钥仍只在环境/Secrets 中配置。

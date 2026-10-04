@@ -24,6 +24,10 @@ If the user has no copy, direct them to `https://ioy.ai/app/template`. They sign
 
 For a new business workflow, update UI, provider integration, metering, API, OpenAPI, product API Skill, and user docs together. Keep the template read-only and the generated project independently runnable.
 
+## One-page tools
+
+For a new term or a focused demand, read [one-page.md](references/one-page.md). Set `layout: "one-page"`, enable exactly one core module and define input/output labels. Authentication, pricing, About/Contact and policies stay on the home page; hosted OAuth/checkout return to it. Preserve the existing task/payment ledgers and verify actual outcomes. Do not describe unconfigured providers or local simulations as launched services.
+
 ## Validate and deliver
 
 Read [launch.md](references/launch.md) for preview and production acceptance. Configure independent Cloudflare, Google, email, model, payment, and analytics services through environment variables or Secrets. The builder Skill is separate from the generated product's API Skill.

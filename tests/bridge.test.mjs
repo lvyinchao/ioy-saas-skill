@@ -54,3 +54,12 @@ test('failed generator is reported without a success message', t => {
   const f = fixture(t); fs.writeFileSync(path.join(f.template, 'scripts/create-saas.mjs'), 'process.exit(7)');
   const r = f.run('--config', f.config, '--out', f.output); assert.notEqual(r.status, 0); assert.doesNotMatch(r.stdout, /Project generated/);
 });
+
+test('one-page requirements pass intact to the authorized generator', t => {
+  const f = fixture(t);
+  const input = {id:'term-brief',layout:'one-page',features:['text'],onePage:{heading:'What does this term mean?',submitLabel:'Explain'},billingProvider:'creem'};
+  fs.writeFileSync(f.config,JSON.stringify(input));
+  const result=f.run('--config',f.config,'--out',f.output);
+  assert.equal(result.status,0,result.stderr);
+  assert.deepEqual(JSON.parse(fs.readFileSync(path.join(f.output,'generated.json'))),input);
+});
