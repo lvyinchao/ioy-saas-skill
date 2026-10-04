@@ -81,3 +81,7 @@ npm test
 ```
 
 Tests use isolated temporary fixtures and do not contact providers or deploy anything. The Skill is in `skills/ioy-saas`; `agents/openai.yaml` supplies its Codex display metadata. Publish product API Skills from each generated product's own OpenAPI, separately from this builder Skill.
+
+## Automatic sitemap maintenance
+
+Generated projects include `/sitemap` and `/sitemap.xml`, both driven by `app/core/public-pages.ts`. Published Markdown/MDX enters automatically on content build; edited update dates, removed files, drafts and noindex flags update the inventory. Add simple code pages once in `app/core/policies.ts` or register custom React views in `staticPublicPages()` with their route implementation. Run `npm run content:build` and `npm run sitemap:check`; production builds run both. See the Skill [content workflow](skills/ioy-saas/references/content.md) and [website guide](https://ioy.ai/docs/sitemap). This requires template 1.1.1 or newer.

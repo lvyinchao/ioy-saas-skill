@@ -1,0 +1,9 @@
+# File-based content workflow
+
+Read actual feature and plan configuration, API schema and current UI. Propose topics linked to useful tasks, then write Markdown under content/<kind>/<locale>. Required frontmatter is documented in docs/content.md. Use stable content IDs to join translations; use locale-specific slugs. Keep policy text labelled as operator draft until facts are supplied.
+
+Use product placeholders and generated plan/feature tables. Never claim an unconfigured feature is live. Before publishing run content:check, check internal links, preview at local URL, inspect mobile and full SSR body, and verify live URL after deployment. Drafts use status:draft and local ?preview=1; they must not enter list/search/RSS/sitemap. Redirect changed URLs through product.redirects. Blog authors and dates must be accurate. No fabricated customer proof.
+
+The mother template uses siteMode=template and content/ for operator onboarding. The generator sets siteMode=product and replaces it with starter-content/ end-user material. In the independent project, maintain content/ for the actual customer workflow; do not publish mother-template installation guides as product help.
+
+Sitemaps are automatic: `/sitemap` and `/sitemap.xml` consume `app/core/public-pages.ts`. Published Markdown/MDX under the four content collections joins on content:build; edits use actual updatedAt, deletions/drafts/indexable:false disappear. For simple code pages register once in app/core/policies.ts pages; for custom React views register metadata in staticPublicPages() and implement the view in app/routes/site.tsx. Never maintain a second sitemap URL list. Run content:build and sitemap:check; production build runs both. Verify page, HTML/XML sitemap and robots after an authorized deployment; translated entries require enabled, published versions and stable IDs.

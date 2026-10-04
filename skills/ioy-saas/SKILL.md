@@ -19,7 +19,7 @@ If the user has no copy, direct them to `https://ioy.ai/app/template`. They sign
 2. Adapt [requirements.json](references/requirements.json) to actual supported modules. Keep service credentials separate. Confirm the output directory is empty and outside the template.
 3. Run `node <skill-directory>/scripts/create-project.mjs --template <template-directory> --config <requirements-file> --out <new-project-directory>`.
 4. Follow the generated README: install dependencies, initialize local secrets and D1, run relevant checks, start the app, and inspect actual pages and task outputs. Local mail and AI simulations must remain clearly labeled.
-5. Personalize product configuration, navigation, feature pages, user docs, Blog, and policy drafts around enabled functionality. Do not invent testimonials, logos, revenue, performance statistics, or legal guarantees.
+5. Personalize product configuration, navigation, feature pages, user docs, Blog, and policy drafts around enabled functionality. For public page/content changes, follow [content.md](references/content.md): the HTML/XML sitemap uses one page inventory and updates on build. Do not invent testimonials, logos, revenue, performance statistics, or legal guarantees.
 6. Read [assets.md](references/assets.md) when creating personalized materials. Record prompts, provenance, formats, and missing assets. Capture product screenshots from the running app.
 
 For a new business workflow, update UI, provider integration, metering, API, OpenAPI, product API Skill, and user docs together. Keep the template read-only and the generated project independently runnable.
