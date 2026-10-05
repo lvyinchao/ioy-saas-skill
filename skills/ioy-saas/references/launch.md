@@ -9,3 +9,5 @@ Read the generated README and installed template documentation for exact environ
 **Production:** obtain applicable authorization, verify resource bindings and Secrets without printing values, prepare migrations, backup/restore and rollback records, deploy the accepted version, inspect the actual domain, and exercise supported workflows. Report missing accounts/keys or sandbox availability explicitly. Never call an unconfigured payment or simulated model production-ready.
 
 Generate the product API Skill and SDK from that product's OpenAPI. Check scoped/expiring/revocable hashed API keys and tracing. This installation Skill does not itself operate the product API.
+
+GA4 starts automatically when GA4_ID is configured, without a consent banner or saved consent choice. Preserve DNT/GPC, disabled advertising signals and sensitive-data filtering. Verify actual received page views/conversions; a tag or collection request alone is not Realtime reporting proof. Document the behavior in the product privacy policy.
