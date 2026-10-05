@@ -43,6 +43,14 @@ Codex collects positioning, workflow, input/output, models, billing, API, brand,
 
 Follow the generated README to install dependencies, initialize local secrets and the database, run checks, and preview the application. Local model/email simulation is not a live service. Configure **your own** Cloudflare, Google, email, AI, payment, and analytics services before preview/production acceptance. See [configuration](https://ioy.ai/docs/configuration), [quickstart](https://ioy.ai/docs/quickstart), and [project generation](https://ioy.ai/docs/create-product).
 
+## Optional Resend email
+
+For verification, password resets or transactional notifications through Resend, ask Codex to use the [Resend integration workflow](skills/ioy-saas/references/resend.md). It covers domain setup, API keys in Secrets, the mail adapter and delivery checks. The current template uses Cloudflare native email; this workflow guides implementation in your independent product. Installing Skills alone does not configure email delivery.
+
+```sh
+npx skills add resend/resend-skills
+```
+
 ## Manual generator bridge
 
 From a clone of this public repository:

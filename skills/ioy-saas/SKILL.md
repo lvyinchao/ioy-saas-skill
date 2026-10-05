@@ -35,3 +35,7 @@ Read [launch.md](references/launch.md) for preview and production acceptance. Co
 Preserve unrelated changes and follow the user's existing authorization. Installing this Skill does not authorize production changes, external messages, or public publication. Do not infer success for an unknown task or payment, or blindly repeat paid calls.
 
 Report output path and template version; distinguish implementation, local simulation, sandbox checks, production verification, commit, push, and deployment. State concrete missing external conditions rather than describing a local demo as a launched product.
+
+## Resend email
+
+When the product selects Resend for verification, password resets or transactional notifications, read [resend.md](references/resend.md). It covers official Skills, domain verification, Secrets, the server-side adapter, outbox/idempotency, delivery webhooks and acceptance. Check the installed template's actual mail implementation first: the current Cloudflare EMAIL binding does not become a Resend adapter merely by installing Skills or adding an API key. Implement the selected service in the independent product and preserve existing authentication and local simulation behavior.
