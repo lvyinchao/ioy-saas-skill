@@ -1,0 +1,284 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9-]{2,40}$"
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 80
+    },
+    "description": {
+      "type": "string"
+    },
+    "tagline": {
+      "type": "string"
+    },
+    "domain": {
+      "type": "string",
+      "format": "uri"
+    },
+    "supportEmail": {
+      "type": "string",
+      "format": "email",
+      "pattern": "^(?:[A-Za-z0-9_'+\\-]+\\.)*[A-Za-z0-9_'+\\-]*[A-Za-z0-9_+-]@(?:[A-Za-z0-9][A-Za-z0-9\\-]*\\.)+[A-Za-z]{2,}$"
+    },
+    "features": {
+      "minItems": 1,
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "text",
+          "image",
+          "audio"
+        ]
+      }
+    },
+    "layout": {
+      "type": "string",
+      "enum": [
+        "standard",
+        "one-page"
+      ]
+    },
+    "onePage": {
+      "type": "object",
+      "properties": {
+        "heading": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 500
+        },
+        "inputLabel": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 500
+        },
+        "placeholder": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 500
+        },
+        "submitLabel": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 500
+        },
+        "resultLabel": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 500
+        }
+      },
+      "additionalProperties": false
+    },
+    "brand": {
+      "type": "object",
+      "properties": {
+        "accent": {
+          "type": "string"
+        },
+        "dark": {
+          "type": "string"
+        },
+        "font": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "retentionDays": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 3650
+    },
+    "limits": {
+      "type": "object",
+      "properties": {
+        "signupCredits": {
+          "type": "integer",
+          "exclusiveMinimum": 0,
+          "maximum": 9007199254740991
+        },
+        "dailyCredits": {
+          "type": "integer",
+          "exclusiveMinimum": 0,
+          "maximum": 9007199254740991
+        },
+        "concurrentJobs": {
+          "type": "integer",
+          "exclusiveMinimum": 0,
+          "maximum": 9007199254740991
+        },
+        "maxStorageBytes": {
+          "type": "integer",
+          "exclusiveMinimum": 0,
+          "maximum": 9007199254740991
+        },
+        "maxFiles": {
+          "type": "integer",
+          "exclusiveMinimum": 0,
+          "maximum": 9007199254740991
+        },
+        "maxUploadBytes": {
+          "type": "integer",
+          "exclusiveMinimum": 0,
+          "maximum": 9007199254740991
+        },
+        "maxResultBytes": {
+          "type": "integer",
+          "exclusiveMinimum": 0,
+          "maximum": 9007199254740991
+        },
+        "dailyCostMicros": {
+          "type": "integer",
+          "exclusiveMinimum": 0,
+          "maximum": 9007199254740991
+        }
+      },
+      "additionalProperties": false
+    },
+    "plans": {
+      "minItems": 1,
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "kind": {
+            "type": "string",
+            "enum": [
+              "free",
+              "subscription",
+              "pack"
+            ]
+          },
+          "amount": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 9007199254740991
+          },
+          "currency": {
+            "type": "string",
+            "const": "USD"
+          },
+          "interval": {
+            "type": "string",
+            "enum": [
+              "once",
+              "month",
+              "year"
+            ]
+          },
+          "credits": {
+            "type": "integer",
+            "exclusiveMinimum": 0,
+            "maximum": 9007199254740991
+          },
+          "description": {
+            "type": "string"
+          },
+          "featured": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "kind",
+          "amount",
+          "currency",
+          "interval",
+          "credits"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "prices": {
+      "type": "object",
+      "propertyNames": {
+        "type": "string"
+      },
+      "additionalProperties": {
+        "type": "object",
+        "properties": {
+          "stripe": {
+            "type": "string"
+          },
+          "creem": {
+            "type": "string"
+          },
+          "waffo": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "billingProvider": {
+      "type": "string",
+      "enum": [
+        "waffo",
+        "stripe",
+        "creem"
+      ]
+    },
+    "emailProvider": {
+      "type": "string",
+      "enum": [
+        "cloudflare",
+        "resend"
+      ]
+    },
+    "analyticsEnabled": {
+      "type": "boolean"
+    },
+    "apiEnabled": {
+      "type": "boolean"
+    },
+    "audience": {
+      "type": "string"
+    },
+    "workflow": {
+      "type": "string"
+    },
+    "inputOutput": {
+      "type": "string"
+    },
+    "model": {
+      "type": "string"
+    },
+    "dataPolicy": {
+      "type": "string"
+    },
+    "locales": {
+      "minItems": 1,
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "en",
+          "zh",
+          "ar"
+        ]
+      }
+    }
+  },
+  "required": [
+    "id",
+    "name",
+    "domain",
+    "supportEmail",
+    "features"
+  ],
+  "additionalProperties": false
+}

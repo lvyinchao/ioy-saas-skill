@@ -16,6 +16,9 @@ function fixture(t) {
   fs.writeFileSync(path.join(template, 'README.md'), 'fixture');
   fs.writeFileSync(path.join(template, 'docs/launch.md'), 'fixture');
   fs.writeFileSync(path.join(template, 'scripts/create-saas.mjs'), `import fs from 'node:fs'; import path from 'node:path'; const args=process.argv.slice(2); const out=args[args.indexOf('--out')+1]; const config=args[args.indexOf('--config')+1]; fs.mkdirSync(out,{recursive:true}); fs.writeFileSync(path.join(out,'generated.json'),fs.readFileSync(config));`);
+  fs.mkdirSync(path.join(template,'schemas'));
+  fs.writeFileSync(path.join(template,'release-manifest.json'),JSON.stringify({version:'1.3.0',minimumNode:'24.0.0',capabilities:{layouts:['standard','one-page'],emailProviders:['cloudflare','resend'],paymentProviders:['waffo','stripe','creem'],features:['text','image','audio'],api:true,requirementsSchema:'schemas/requirements.schema.json'}}));
+  fs.writeFileSync(path.join(template,'schemas/requirements.schema.json'),JSON.stringify({properties:Object.fromEntries(['id','apiEnabled','layout','features','onePage','billingProvider','emailProvider'].map(k=>[k,{}]))}));
   const config = path.join(root, 'requirements.json');
   fs.writeFileSync(config, JSON.stringify({ id: 'test-product', apiEnabled: true }));
   const output = path.join(root, 'product');
@@ -62,4 +65,9 @@ test('one-page requirements pass intact to the authorized generator', t => {
   const result=f.run('--config',f.config,'--out',f.output);
   assert.equal(result.status,0,result.stderr);
   assert.deepEqual(JSON.parse(fs.readFileSync(path.join(f.output,'generated.json'))),input);
+});
+
+test('outdated templates and unsupported email adapters fail with actionable diagnostics',t=>{
+  const f=fixture(t);fs.writeFileSync(path.join(f.template,'release-manifest.json'),JSON.stringify({version:'1.2.1'}));
+  const old=f.run('--check');assert.notEqual(old.status,0);assert.match(old.stderr,/1.3.0/);
 });

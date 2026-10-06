@@ -48,14 +48,31 @@ export function main(args = process.argv.slice(2)) {
   for (const file of [generator, path.join(template, 'README.md'), path.join(template, 'docs/launch.md')]) {
     if (!fs.existsSync(file) || !fs.statSync(file).isFile()) throw new Error('Local ioy template missing. Supply an authorized copy with --template or SAAS_TEMPLATE. This public Skill does not grant private repository access.');
   }
+  const manifestPath=path.join(template,'release-manifest.json');
+  if(!fs.existsSync(manifestPath)) throw Error('Template capability manifest missing. Download template 1.3.0 or newer from ioy.ai.');
+  const manifest=JSON.parse(fs.readFileSync(manifestPath,'utf8'));
+  const version=(v)=>v.split('.').map(Number);
+  const [major,minor]=version(manifest.version||'0.0.0');
+  if(major<1 || major===1&&minor<3 || !manifest.capabilities) throw Error('This Skill requires template 1.3.0 or newer.');
+  const minimum=version(manifest.minimumNode||'24.0.0'),current=version(process.versions.node);
+  if(current[0]<minimum[0] || current[0]===minimum[0]&&current[1]<minimum[1]) throw Error('Use Node '+manifest.minimumNode+' or newer for this template.');
+  const schemaPath=path.join(template,manifest.capabilities.requirementsSchema||'schemas/requirements.schema.json');
+  if(!fs.existsSync(schemaPath)) throw Error('Template requirements schema missing; refresh the authorized template.');
   if (options.check) {
     if (options['--config'] || options['--out']) throw new Error('--check cannot be combined with --config or --out.');
-    console.log('Local template files available. No project generated; license entitlement is not checked.');
+    console.log(JSON.stringify({template:manifest.version,capabilities:manifest.capabilities,projectGenerated:false,licenseEntitlementChecked:false},null,2));
     return;
   }
   if (!options['--config'] || !options['--out']) throw new Error(usage);
   const config = path.resolve(options['--config']);
-  assertSafeRequirements(JSON.parse(fs.readFileSync(config, 'utf8')));
+  const requirements=JSON.parse(fs.readFileSync(config,'utf8'));
+  assertSafeRequirements(requirements);
+  const schema=JSON.parse(fs.readFileSync(schemaPath,'utf8'));
+  for(const key of Object.keys(requirements)) if(!Object.hasOwn(schema.properties,key)) throw Error('Unsupported requirement field: '+key+'. Credentials belong in Secrets; optional services use launch-config.json.');
+  const cap=manifest.capabilities;
+  for(const [field,supported,fallback] of [['layout','layouts','standard'],['emailProvider','emailProviders','cloudflare'],['billingProvider','paymentProviders','waffo']]) if(!cap[supported]?.includes(requirements[field]||fallback)) throw Error('Template does not support '+field+': '+requirements[field]);
+  if(requirements.features?.some(feature=>!cap.features?.includes(feature))) throw Error('Template does not support the requested AI workflow.');
+  if(requirements.apiEnabled && !cap.api) throw Error('Template does not support external API access.');
   const output = path.resolve(options['--out']);
   const resolvedOutput = physicalPath(output);
   const relative = path.relative(fs.realpathSync(template), resolvedOutput);

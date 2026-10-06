@@ -38,4 +38,9 @@ Report output path and template version; distinguish implementation, local simul
 
 ## Resend email
 
-When the product selects Resend for verification, password resets or transactional notifications, read [resend.md](references/resend.md). It covers official Skills, domain verification, Secrets, the server-side adapter, outbox/idempotency, delivery webhooks and acceptance. Check the installed template's actual mail implementation first: the current Cloudflare EMAIL binding does not become a Resend adapter merely by installing Skills or adding an API key. Implement the selected service in the independent product and preserve existing authentication and local simulation behavior.
+When the product selects Resend for verification, password resets or transactional notifications, read [resend.md](references/resend.md). It covers official Skills, domain verification, Secrets, the server-side adapter, outbox/idempotency, delivery webhooks and acceptance. Template 1.3.0 includes both mail adapters; select emailProvider, configure independent Secrets and sender domain, and verify acceptance and signed delivery. Preserve local simulation.
+
+
+## Compatibility
+
+Require template 1.3.0+ and Node 24 LTS. The bridge reads release-manifest.json, capabilities and schemas/requirements.schema.json, then passes schema-supported requirements to the generator. Read [requirements schema](references/requirements.schema.json) when selecting options; `emailProvider` accepts cloudflare/resend, `analyticsEnabled` is a boolean. Keep non-secret launch choices in generated launch-config.json. Run release:check and test:ui:isolated, record provider acceptance separately, and sync the clean authenticated template snapshot with this Skill version. Partial streams and unknown orders retain their original IDs; never launch another paid request to conceal an unknown result.

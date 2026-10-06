@@ -6,7 +6,7 @@ An Agent Skill for building an independent Cloudflare AI SaaS using [ioy.ai](htt
 
 ## 1. Install in Codex
 
-Install Node.js **22.20 or newer** and Git, then run:
+Install Node.js **24.0 or newer** and Git, then run:
 
 ```sh
 npx --yes skills@1.7.0 add lvyinchao/ioy-saas-skill -s ioy-saas -a codex -g -y
@@ -45,7 +45,7 @@ Follow the generated README to install dependencies, initialize local secrets an
 
 ## Optional Resend email
 
-For verification, password resets or transactional notifications through Resend, ask Codex to use the [Resend integration workflow](skills/ioy-saas/references/resend.md). It covers domain setup, API keys in Secrets, the mail adapter and delivery checks. The current template uses Cloudflare native email; this workflow guides implementation in your independent product. Installing Skills alone does not configure email delivery.
+For verification, password resets or transactional notifications through Resend, ask Codex to use the [Resend integration workflow](skills/ioy-saas/references/resend.md). It covers domain setup, API keys in Secrets, the mail adapter and delivery checks. Template 1.3.0 includes Cloudflare and Resend adapters. Select emailProvider, configure your independent domain/Secrets, and verify acceptance and delivery. Installing Skills alone does not configure email delivery.
 
 ```sh
 npx skills add resend/resend-skills
@@ -74,7 +74,7 @@ The example includes `.example` addresses, text workflow, Waffo, API enabled, 30
 
 ## 中文：第一次使用
 
-1. 准备 Node.js 22.20+、Git。登录 [ioy.ai 领取页](https://ioy.ai/app/template)，创建一小时有效的只读 clone 凭证；无需 GitHub 账号。按上面的 clone 命令下载，用户名填 `ioy`，密码填临时凭证，不是 Google 密码。
+1. 准备 Node.js 24 LTS+、Git。登录 [ioy.ai 领取页](https://ioy.ai/app/template)，创建一小时有效的只读 clone 凭证；无需 GitHub 账号。按上面的 clone 命令下载，用户名填 `ioy`，密码填临时凭证，不是 Google 密码。
 2. 运行上面的一行安装命令，然后重新打开 Codex 或开始新会话。
 3. 输入 `$ioy-saas`，说明产品用途、模板路径和新项目的空目录；Codex 会补齐八类关键需求。
 4. Skill 调用本地模板生成独立项目。按生成项目的 README 安装依赖、初始化本地密钥和数据库，启动并检查页面及实际结果。
@@ -97,3 +97,6 @@ Generated projects include `/sitemap` and `/sitemap.xml`, both driven by `app/co
 ## One-page SaaS
 
 支持围绕新词或单个需求创建极简工具。需求设 `layout: "one-page"`，只启用一个模块；输入、结果、账户、定价、About、Contact 和政策留在首页。参考 [单页工作流](skills/ioy-saas/references/one-page.md)，实施由授权的模板生成器提供。密钥仍只在环境/Secrets 中配置。
+
+
+Version 1.3.0 requires template 1.3.0+ and Node 24 LTS. `--check` reads the release capability manifest and requirements schema, checks compatible layouts/providers, and never infers launch readiness. Non-secret settings use launch-config.json; provider keys stay in Secrets. SDK and product Skill operations are generated from OpenAPI. Recovery queries existing tasks/orders, with no automatic duplicate paid requests.

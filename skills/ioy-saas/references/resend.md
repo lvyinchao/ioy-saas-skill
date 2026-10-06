@@ -4,7 +4,7 @@
 
 ## 当前能力与选择
 
-母版 1.2.1 使用 Cloudflare 原生 `EMAIL` binding，本地邮件是模拟；目前没有 Resend 适配器、`EMAIL_PROVIDER` 开关或 Resend Webhook 路由。安装 Skill、填写 Key 均不会自动切换发信。用户选择 Resend 时，在生成的独立产品中实现适配并验证；保留原有 Cloudflare 和本地模拟路径，不修改母版生产发信配置。
+母版 1.3.0 已内置 `EmailProvider`、Cloudflare 与 Resend 适配器、`EMAIL_PROVIDER` 选择和 `/api/webhooks/resend`。默认仍为 Cloudflare；生成参数 `emailProvider:"resend"` 只写非敏感服务选择，key 通过独立产品 Secrets 配置。读取 `docs/email.md` 与 `docs/configuration.md`，不要重复实现已存在的适配器。安装官方 Skill 不等于完成域名验证或投递验收。
 
 服务选择、发件域名、发件人、回复邮箱及所需通知记录在上线配置说明，不把新增邮件参数直接塞进现有生成器的 requirements JSON。验证码、重置链接和事务通知先完成；营销订阅、自动回复和收信按产品实际需求另行启用。
 
