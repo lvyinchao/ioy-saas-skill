@@ -1,4 +1,4 @@
 interface:
   display_name: "ioy SaaS"
-  short_description: "Build an independent Cloudflare SaaS from ioy"
-  default_prompt: "Use $ioy-saas to collect my product requirements and build an independent Cloudflare SaaS."
+  short_description: "Build and launch a Cloudflare SaaS with guided integrations"
+  default_prompt: "Use $ioy-saas to collect my requirements, build an independent Cloudflare SaaS, and guide or automate deployment, domain binding, Google and my selected payment integration."

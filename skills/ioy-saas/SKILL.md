@@ -1,6 +1,6 @@
 ---
 name: ioy-saas
-description: Build an independent Cloudflare AI SaaS from an authorized local ioy template. Use when a user asks to start a product with ioy, collect SaaS requirements, customize its starter, or prepare its launch.
+description: Build an independent Cloudflare AI SaaS from an authorized local ioy template. Use when a user asks to start a product with ioy, collect SaaS requirements, customize its starter, deploy/bind its Cloudflare domain, configure Google services, or publish Waffo/Creem/Stripe products.
 ---
 
 # ioy SaaS
@@ -30,7 +30,7 @@ For a new term or a focused demand, read [one-page.md](references/one-page.md). 
 
 ## Validate and deliver
 
-Read [launch.md](references/launch.md) for preview and production acceptance. Configure independent Cloudflare, Google, email, model, payment, and analytics services through environment variables or Secrets. The builder Skill is separate from the generated product's API Skill.
+For guided or automated launch, read [orchestration.md](references/orchestration.md): local acceptance → Cloudflare resources/preview → formal HTTPS domain → Google Auth Platform/GA4/Search Console → email/Turnstile/models → selected payment sandbox/live catalog → guarded production. Run the template launch:plan first, load only the current branch, reuse existing account choices and authorization. Read [launch.md](references/launch.md) for preview and production acceptance. Template 1.3.1+ provides executable launch helpers; update an older authorized snapshot before invoking them. Configure independent Cloudflare, Google, email, model, payment, and analytics services through environment variables or Secrets. The builder Skill is separate from the generated product's API Skill.
 
 Preserve unrelated changes and follow the user's existing authorization. Installing this Skill does not authorize production changes, external messages, or public publication. Do not infer success for an unknown task or payment, or blindly repeat paid calls.
 

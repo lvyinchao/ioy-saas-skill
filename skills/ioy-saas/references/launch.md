@@ -11,3 +11,5 @@ Read the generated README and installed template documentation for exact environ
 Generate the product API Skill and SDK from that product's OpenAPI. Check scoped/expiring/revocable hashed API keys and tracing. This installation Skill does not itself operate the product API.
 
 GA4 starts automatically when GA4_ID is configured, without a consent banner or saved consent choice. Preserve DNT/GPC, disabled advertising signals and sensitive-data filtering. Verify actual received page views/conversions; a tag or collection request alone is not Realtime reporting proof. Document the behavior in the product privacy policy.
+
+For automatic setup use [orchestration](orchestration.md); formal HTTPS must precede Google and provider integration. Template 1.3.1 adds launch helpers; match the sanitized snapshot before invocation.

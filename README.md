@@ -99,4 +99,12 @@ Generated projects include `/sitemap` and `/sitemap.xml`, both driven by `app/co
 支持围绕新词或单个需求创建极简工具。需求设 `layout: "one-page"`，只启用一个模块；输入、结果、账户、定价、About、Contact 和政策留在首页。参考 [单页工作流](skills/ioy-saas/references/one-page.md)，实施由授权的模板生成器提供。密钥仍只在环境/Secrets 中配置。
 
 
-Version 1.3.0 requires template 1.3.0+ and Node 24 LTS. `--check` reads the release capability manifest and requirements schema, checks compatible layouts/providers, and never infers launch readiness. Non-secret settings use launch-config.json; provider keys stay in Secrets. SDK and product Skill operations are generated from OpenAPI. Recovery queries existing tasks/orders, with no automatic duplicate paid requests.
+Version 1.3.1 requires template 1.3.0+ and Node 24 LTS. `--check` reads the release capability manifest and requirements schema, checks compatible layouts/providers, and never infers launch readiness. Non-secret settings use launch-config.json; provider keys stay in Secrets. SDK and product Skill operations are generated from OpenAPI. Recovery queries existing tasks/orders, with no automatic duplicate paid requests.
+
+## Guided or automated launch / 自动接入
+
+Ask Codex: `Use $ioy-saas to deploy my product on Cloudflare, bind my formal domain, configure Google login/One Tap, GA4 and Search Console, then set up my selected payment provider. Guide me only where account ownership or platform checks require me.`
+
+最佳顺序是本地业务验收 → Cloudflare 独立资源和 preview → 正式域名/HTTPS → Google 登录、GA4、Search Console → 邮件/Turnstile/模型 → 所选支付沙箱与 live 商品 → 生产检查、部署、实测。见 [上线编排](skills/ioy-saas/references/orchestration.md)，仅加载当前供应商分支。模板 1.3.1+ 包含执行/商品清单、域名验证、Cloudflare 发布绑定、安全写入密钥、GA4 与 Search Console 接入工具；辅助工具位于私有模板，不在公开 Skill 中包含模板源码。
+
+Google 账号登录后由 Codex 继续引导或操作已授权控制台；API 分支另需正确 scopes 与项目/属性权限。Google 网站 OAuth 客户端通过 Auth Platform 配置；运营者授权不会下发给产品用户。Stripe/Creem 用官方 CLI，Waffo 用官方 Skill/SDK，先查询复用，再创建缺失商品。KYC、2FA、账号选择、真实税务事实和注册商操作交给持有人；配置、沙箱、收款与提现状态分别记录。密钥仅在本机安全输入/环境/Secrets；不要粘贴到聊天。

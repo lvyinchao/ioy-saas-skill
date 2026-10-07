@@ -1,10 +1,10 @@
 {
-  "version": "1.3.0",
-  "template": "1.3.0",
-  "launchSkill": "1.3.0",
-  "publicSkill": "1.3.0",
-  "apiSkill": "1.3.0",
-  "sdk": "1.3.0",
+  "version": "1.3.1",
+  "template": "1.3.1",
+  "launchSkill": "1.3.1",
+  "publicSkill": "1.3.1",
+  "apiSkill": "1.3.1",
+  "sdk": "1.3.1",
   "minimumNode": "24.0.0",
   "capabilities": {
     "layouts": ["standard", "one-page"],
@@ -14,6 +14,15 @@
     "api": true,
     "requirementsSchema": "schemas/requirements.schema.json",
     "costRatesVersion": 2,
-    "recoverySchema": 6
+    "recoverySchema": 6,
+    "launchWorkflowVersion": 1,
+    "launchHelpers": [
+      "plan",
+      "domainVerify",
+      "cloudflareDeployAndBind",
+      "secretTransfer",
+      "ga4",
+      "searchConsole"
+    ]
   }
 }
