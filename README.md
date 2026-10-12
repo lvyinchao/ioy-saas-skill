@@ -30,6 +30,13 @@ The URL serves a sanitized release of the private GitHub project through authent
 
 Give Codex the template path, or set `SAAS_TEMPLATE` in the environment used to launch Codex. Never place service keys in a prompt or requirements file.
 
+Install the template's dependencies once before using its generator. This uses Node 24+; it prepares ignored dependencies and reference assets, without connecting any provider:
+
+```sh
+cd ioy-template
+npm ci
+```
+
 ## 3. Ask Codex to create your product
 
 ```text
@@ -76,7 +83,7 @@ The example includes `.example` addresses, text workflow, Waffo, API enabled, 30
 
 1. 准备 Node.js 22.20+（Skill 安装器）、Node.js 24+（模板构建）和 Git。登录 [ioy.ai 领取页](https://ioy.ai/app/template)，创建一小时有效的只读 clone 凭证；无需 GitHub 账号。按上面的 clone 命令下载，用户名填 `ioy`，密码填临时凭证，不是 Google 密码。
 2. 运行上面的一行安装命令，然后重新打开 Codex 或开始新会话。
-3. 输入 `$ioy-saas`，说明产品用途、模板路径和新项目的空目录；Codex 会补齐八类关键需求。
+3. 在新下载的模板目录运行 `npm ci` 安装生成器依赖，再输入 `$ioy-saas`，说明产品用途、模板路径和新项目的空目录；Codex 会补齐八类关键需求。
 4. Skill 调用本地模板生成独立项目。按生成项目的 README 安装依赖、初始化本地密钥和数据库，启动并检查页面及实际结果。
 5. 在环境变量或 Cloudflare Secrets 中配置自己的 Google、邮件、模型、支付和分析服务，完成测试环境验收后再发布。不要把 key 写进聊天、需求文件、Skill 或 Git。
 
@@ -99,7 +106,7 @@ Generated projects include `/sitemap` and `/sitemap.xml`, both driven by `app/co
 支持围绕新词或单个需求创建极简工具。需求设 `layout: "one-page"`，只启用一个模块；输入、结果、账户、定价、About、Contact 和政策留在首页。参考 [单页工作流](skills/ioy-saas/references/one-page.md)，实施由授权的模板生成器提供。密钥仍只在环境/Secrets 中配置。
 
 
-Version 1.4.0 supports older compatible generators; the shared launch coordinator requires template 1.4.0+ and Node 24+. `--check` reads the release capability manifest and requirements schema, checks compatible layouts/providers, and never infers launch readiness. Non-secret settings use launch-config.json; provider keys stay in Secrets. SDK and product Skill operations are generated from OpenAPI. Recovery queries existing tasks/orders, with no automatic duplicate paid requests.
+Version 1.5.0 supports older compatible generators; the shared launch coordinator requires template 1.4.0+ and Node 24+, while expanded capability presets require template 1.5.0+. `--check` reads the release capability manifest and requirements schema, checks compatible layouts/providers, and never infers launch readiness. Non-secret settings use launch-config.json; provider keys stay in Secrets. SDK and product Skill operations are generated from OpenAPI. Recovery queries existing tasks/orders, with no automatic duplicate paid requests.
 
 ## Guided or automated launch / 自动接入
 
@@ -114,3 +121,24 @@ Google 账号登录后由 Codex 继续引导或操作已授权控制台；API �
 In your authorized template, use `npm run ioy -- create --config examples/requirements.json --out ../my-product`; use `examples/one-page.json` for a single-page tool. In the generated project, `npm run ioy -- doctor`, `launch`, `resume` and `status` share the same launch choices and checkpoint journal. Read [the coordinator guide](skills/ioy-saas/references/coordinator.md) and [launch checklist](https://ioy.ai/docs/launch-checklist). Brand design uses the bundled `brand-to-ui` Skill.
 
 The template is free after verified sign-in. Your Cloudflare, model, email and payment services have independent costs. Local configuration, sandbox acceptance and production acceptance remain separate. No CLI telemetry is uploaded.
+
+## Template 1.5 capability presets
+
+Use the authorized template's CLI to collect eight groups of requirements or start from a complete preset. Replace example product names, domains and support addresses before publishing.
+
+```sh
+npm run ioy -- create --out /absolute/path/new-product
+# Or edit a preset and generate from its requirements:
+npm run ioy -- create --config presets/research-chat.json --out /absolute/path/new-product
+cd /absolute/path/new-product
+npm ci
+npm run db:local
+npm run ioy -- doctor
+npm run ioy -- status
+```
+
+Available presets are summary-tool, image-studio, voice-tool and research-chat. Template 1.5 also supplies persistent chat, private image editing/captioning, sourced web search, Workers AI/fal adapters, three visual themes and a component gallery. Optional waitlist/newsletter, durable operator notifications, Umami/Plausible/Clarity, Crisp and the paired browser extension remain disabled until the generated product configures them. The template's README and [capability workflow](skills/ioy-saas/references/capabilities.md) explain the exact environment variables and acceptance steps.
+
+`ioy payment` provisions the selected Stripe, Creem or Waffo **sandbox** catalog and webhook using an operation journal and read-back checks. `ioy upgrade` prepares a controlled three-way upgrade from the recorded template baseline. Configuration and fixture tests do not prove real email delivery, payments, model results or production readiness. No provider credential or private source code belongs in this public Skill repository.
+
+中文：先选择完整 SaaS 或单页工具，再使用向导收集八类需求。四套预设、可选邮件增长、通知、分析、客服与浏览器扩展都在领取的模板内；本公开仓库只提供 Skill 和指导。完成本地验收后，使用产品自己的服务账号配置并验证。

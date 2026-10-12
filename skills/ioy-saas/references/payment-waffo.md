@@ -44,7 +44,7 @@ once pack 用 client.onetimeProducts.create，不带 billingPeriod。amountDispl
 
 通过 GraphQL Store.storeWebhooks 查询已有 endpoint；本版没有 webhooks.list()。使用 client.webhooks.add({ storeId, channel:'http', url:origin+'/api/webhooks/waffo', events:[...], testMode:true }, {idempotencyKey}) 创建 test endpoint，已有匹配则复用/增补必要事件。
 
-订阅/支付事件涵盖 order.completed、subscription.activated/payment_succeeded/past_due/canceling/uncanceled/canceled/plan_changed、refund.succeeded/failed；核对当前模板 Waffo 适配器的实际处理。保持原始 body、RSA 验签、模式检查、流水持久化；官方通用示例不能覆盖模板的持久化/幂等/乱序保护。
+订阅/支付事件涵盖 order.completed、subscription.activated/payment_succeeded/renewed/recovered/past_due/canceling/uncanceled/canceled/plan_changed/plan_change_scheduled/plan_change_failed、refund.succeeded/failed；核对当前模板 Waffo 适配器的实际处理。保持原始 body、RSA 验签、模式检查、流水持久化；官方通用示例不能覆盖模板的持久化/幂等/乱序保护。
 
 创建 test 商品不等于生产上架。经沙箱与既有 live 发布授权后调用相应 namespace `.publish({ id }, {idempotencyKey})` 发布生产版本，再用 prod 环境回读 active 商品/价格/周期/归属。publish 是单向的，不为了测试调用。prod webhook 使用 testMode:false、prod key/public key；不得覆盖 test 配置。商户 prodEnabled/KYB 需平台实际批准，否则保留 BILLING_MODE=disabled 并报告具体控制台阻碍。
 

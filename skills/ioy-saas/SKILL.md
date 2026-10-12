@@ -15,7 +15,7 @@ If the user has no copy, direct them to `https://ioy.ai/app/template`. They sign
 
 ## Collect and generate
 
-1. Read [intake.md](references/intake.md). Reuse existing answers and collect only missing requirements. Never request secrets in requirements or chat.
+1. Read [intake.md](references/intake.md). Reuse existing answers and collect only missing requirements. Never request secrets in requirements or chat. For a fresh authorized template clone, run `npm ci` in its directory before generation; the template CLI needs its installed dependencies. Dependencies remain ignored and no provider is connected by installation.
 2. Adapt [requirements.json](references/requirements.json) to actual supported modules. Keep service credentials separate. Confirm the output directory is empty and outside the template.
 3. Run `node <skill-directory>/scripts/create-project.mjs --template <template-directory> --config <requirements-file> --out <new-project-directory>`.
 4. Follow the generated README: install dependencies, initialize local secrets and D1, run relevant checks, start the app, and inspect actual pages and task outputs. Local mail and AI simulations must remain clearly labeled.
@@ -23,6 +23,10 @@ If the user has no copy, direct them to `https://ioy.ai/app/template`. They sign
 6. Read [assets.md](references/assets.md) when creating personalized materials. Record prompts, provenance, formats, and missing assets. Capture product screenshots from the running app.
 
 For a new business workflow, update UI, provider integration, metering, API, OpenAPI, product API Skill, and user docs together. Keep the template read-only and the generated project independently runnable.
+
+## Expanded capabilities
+
+For template 1.5.0+, read [capabilities.md](references/capabilities.md) for the selected preset or optional module. Use the shared `ioy create/payment/upgrade` commands and schemas. The public Skill contains instructions, not the private implementation, provider credentials or product data. Generate from an authorized clean template, then configure and validate the product independently.
 
 ## One-page tools
 

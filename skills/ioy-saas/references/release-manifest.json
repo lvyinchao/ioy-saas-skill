@@ -1,10 +1,10 @@
 {
-  "version": "1.4.0",
-  "template": "1.4.0",
-  "launchSkill": "1.4.0",
-  "publicSkill": "1.4.0",
-  "apiSkill": "1.4.0",
-  "sdk": "1.4.0",
+  "version": "1.5.0",
+  "template": "1.5.0",
+  "launchSkill": "1.5.0",
+  "publicSkill": "1.5.0",
+  "apiSkill": "1.5.0",
+  "sdk": "1.5.0",
   "minimumNode": "24.0.0",
   "capabilities": {
     "layouts": [
@@ -23,7 +23,11 @@
     "features": [
       "text",
       "image",
-      "audio"
+      "audio",
+      "chat",
+      "image-edit",
+      "image-caption",
+      "web-search"
     ],
     "api": true,
     "requirementsSchema": "schemas/requirements.schema.json",
@@ -38,6 +42,41 @@
       "ga4",
       "searchConsole",
       "coordinator"
-    ]
+    ],
+    "aiProviders": [
+      "openai",
+      "workers-ai",
+      "fal"
+    ],
+    "presets": [
+      "summary-tool",
+      "image-studio",
+      "voice-tool",
+      "research-chat"
+    ],
+    "themePresets": [
+      "paper-ink",
+      "midnight",
+      "studio-blue"
+    ],
+    "growthProviders": [
+      "resend",
+      "beehiiv"
+    ],
+    "notificationChannels": [
+      "email",
+      "discord",
+      "feishu"
+    ],
+    "optionalAnalytics": [
+      "umami",
+      "plausible",
+      "clarity"
+    ],
+    "supportChat": [
+      "crisp"
+    ],
+    "extension": "mv3-paired-api",
+    "upgrade": "hash-bound-three-way"
   }
 }

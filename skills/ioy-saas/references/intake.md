@@ -4,7 +4,7 @@ Reuse answers already supplied. Ask a small group of missing questions at a time
 
 1. **Positioning / 定位**: audience, problem, product name, a useful outcome.
 2. **Workflow / 工作流**: steps to the first result, history, export, failure recovery.
-3. **Inputs and outputs / 输入输出**: text, images, audio, file types and limits. Current reference modules are text/image/audio; other workflows need implementation.
+3. **Inputs and outputs / 输入输出**: text, images, audio, file types and limits. Template 1.5+ supports text/image/audio/chat/image-edit/image-caption/web-search; select the actual supported workflow and adapter. Other workflows need implementation. For an older copy, check its release-manifest.json before selecting modules.
 4. **Models / 模型**: provider, model, rights to commercial use, expected cost and daily spending cap. Ask for configuration names, never actual keys.
 5. **Billing / 计费**: trial, monthly/yearly subscriptions, top-ups, credit units, limits and refunds. Default adapter: Waffo; Stripe and Creem are alternatives requiring their own setup.
 6. **API / 开放接口**: whether enabled, scopes, rate limits, idempotency, product API Skill.

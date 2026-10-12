@@ -34,9 +34,21 @@
         "enum": [
           "text",
           "image",
-          "audio"
+          "audio",
+          "chat",
+          "image-edit",
+          "image-caption",
+          "web-search"
         ]
       }
+    },
+    "themePreset": {
+      "type": "string",
+      "enum": [
+        "paper-ink",
+        "midnight",
+        "studio-blue"
+      ]
     },
     "layout": {
       "type": "string",

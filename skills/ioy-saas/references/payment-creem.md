@@ -25,7 +25,7 @@ npx --yes @creem_io/cli@0.9.0 products get '<product-id>' --environment test --j
 
 ## 回调和上线
 
-先 webhooks list --all --json，选择当前 origin/api/webhooks/creem 的 HTTP endpoint（不是 CLI delivery mode）。events 包含 checkout.completed、subscription.active/paid/updated/past_due/canceled/expired、refund.created、dispute.created；以当前官方事件和 template adapter 实际映射复核，不订阅虚构事件。
+先 webhooks list --all --json，选择当前 origin/api/webhooks/creem 的 HTTP endpoint（不是 CLI delivery mode）。events 包含 checkout.completed、subscription.active/paid/update/past_due/unpaid/scheduled_cancel/paused/canceled/expired、refund.created、dispute.created；以当前官方事件和 template adapter 实际映射复核，不订阅虚构事件。
 
 ```sh
 npx --yes @creem_io/cli@0.9.0 webhooks create --help
@@ -34,7 +34,7 @@ npx --yes @creem_io/cli@0.9.0 webhooks create \
   --delivery-mode http --event checkout.completed --event subscription.paid \
   --event subscription.canceled --event refund.created --event dispute.created \
   --environment test --json
-# 依据实际订阅契约补齐 active/updated/past_due/expired，再 get 回读。
+# 依据实际订阅契约补齐 active/update/past_due/expired，再 get 回读。
 npx --yes @creem_io/cli@0.9.0 webhooks get '<webhook-id>' --environment test --json
 ```
 
