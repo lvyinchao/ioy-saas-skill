@@ -6,7 +6,7 @@ An Agent Skill for building an independent Cloudflare AI SaaS using [ioy.ai](htt
 
 ## 1. Install in Codex
 
-Install Node.js **24.0 or newer** and Git, then run:
+Install Node.js **22.20 or newer** and Git for the Skill installer; use **24.0 or newer** when building the template, then run:
 
 ```sh
 npx --yes skills@1.7.0 add lvyinchao/ioy-saas-skill -s ioy-saas -a codex -g -y
@@ -74,7 +74,7 @@ The example includes `.example` addresses, text workflow, Waffo, API enabled, 30
 
 ## 中文：第一次使用
 
-1. 准备 Node.js 24 LTS+、Git。登录 [ioy.ai 领取页](https://ioy.ai/app/template)，创建一小时有效的只读 clone 凭证；无需 GitHub 账号。按上面的 clone 命令下载，用户名填 `ioy`，密码填临时凭证，不是 Google 密码。
+1. 准备 Node.js 22.20+（Skill 安装器）、Node.js 24+（模板构建）和 Git。登录 [ioy.ai 领取页](https://ioy.ai/app/template)，创建一小时有效的只读 clone 凭证；无需 GitHub 账号。按上面的 clone 命令下载，用户名填 `ioy`，密码填临时凭证，不是 Google 密码。
 2. 运行上面的一行安装命令，然后重新打开 Codex 或开始新会话。
 3. 输入 `$ioy-saas`，说明产品用途、模板路径和新项目的空目录；Codex 会补齐八类关键需求。
 4. Skill 调用本地模板生成独立项目。按生成项目的 README 安装依赖、初始化本地密钥和数据库，启动并检查页面及实际结果。
@@ -99,7 +99,7 @@ Generated projects include `/sitemap` and `/sitemap.xml`, both driven by `app/co
 支持围绕新词或单个需求创建极简工具。需求设 `layout: "one-page"`，只启用一个模块；输入、结果、账户、定价、About、Contact 和政策留在首页。参考 [单页工作流](skills/ioy-saas/references/one-page.md)，实施由授权的模板生成器提供。密钥仍只在环境/Secrets 中配置。
 
 
-Version 1.3.1 requires template 1.3.0+ and Node 24 LTS. `--check` reads the release capability manifest and requirements schema, checks compatible layouts/providers, and never infers launch readiness. Non-secret settings use launch-config.json; provider keys stay in Secrets. SDK and product Skill operations are generated from OpenAPI. Recovery queries existing tasks/orders, with no automatic duplicate paid requests.
+Version 1.4.0 supports older compatible generators; the shared launch coordinator requires template 1.4.0+ and Node 24+. `--check` reads the release capability manifest and requirements schema, checks compatible layouts/providers, and never infers launch readiness. Non-secret settings use launch-config.json; provider keys stay in Secrets. SDK and product Skill operations are generated from OpenAPI. Recovery queries existing tasks/orders, with no automatic duplicate paid requests.
 
 ## Guided or automated launch / 自动接入
 
@@ -108,3 +108,9 @@ Ask Codex: `Use $ioy-saas to deploy my product on Cloudflare, bind my formal dom
 最佳顺序是本地业务验收 → Cloudflare 独立资源和 preview → 正式域名/HTTPS → Google 登录、GA4、Search Console → 邮件/Turnstile/模型 → 所选支付沙箱与 live 商品 → 生产检查、部署、实测。见 [上线编排](skills/ioy-saas/references/orchestration.md)，仅加载当前供应商分支。模板 1.3.1+ 包含执行/商品清单、域名验证、Cloudflare 发布绑定、安全写入密钥、GA4 与 Search Console 接入工具；辅助工具位于私有模板，不在公开 Skill 中包含模板源码。
 
 Google 账号登录后由 Codex 继续引导或操作已授权控制台；API 分支另需正确 scopes 与项目/属性权限。Google 网站 OAuth 客户端通过 Auth Platform 配置；运营者授权不会下发给产品用户。Stripe/Creem 用官方 CLI，Waffo 用官方 Skill/SDK，先查询复用，再创建缺失商品。KYC、2FA、账号选择、真实税务事实和注册商操作交给持有人；配置、沙箱、收款与提现状态分别记录。密钥仅在本机安全输入/环境/Secrets；不要粘贴到聊天。
+
+## Shared first-launch commands (template 1.4.0+)
+
+In your authorized template, use `npm run ioy -- create --config examples/requirements.json --out ../my-product`; use `examples/one-page.json` for a single-page tool. In the generated project, `npm run ioy -- doctor`, `launch`, `resume` and `status` share the same launch choices and checkpoint journal. Read [the coordinator guide](skills/ioy-saas/references/coordinator.md) and [launch checklist](https://ioy.ai/docs/launch-checklist). Brand design uses the bundled `brand-to-ui` Skill.
+
+The template is free after verified sign-in. Your Cloudflare, model, email and payment services have independent costs. Local configuration, sandbox acceptance and production acceptance remain separate. No CLI telemetry is uploaded.

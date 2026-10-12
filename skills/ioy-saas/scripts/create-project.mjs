@@ -78,7 +78,9 @@ export function main(args = process.argv.slice(2)) {
   const relative = path.relative(fs.realpathSync(template), resolvedOutput);
   if (!relative || (!relative.startsWith(`..${path.sep}`) && relative !== '..' && !path.isAbsolute(relative))) throw new Error('Output must be outside the template.');
   if (fs.existsSync(output) && (!fs.statSync(output).isDirectory() || fs.readdirSync(output).length)) throw new Error('Output must be an empty directory. Existing files are preserved.');
-  const result = spawnSync(process.execPath, [generator, '--config', config, '--out', output], { cwd: template, stdio: 'inherit', shell: false });
+  const coordinator = path.join(template, 'scripts/ioy.mjs');
+  const command = fs.existsSync(coordinator) ? [coordinator, 'create', '--config', config, '--out', output] : [generator, '--config', config, '--out', output];
+  const result = spawnSync(process.execPath, command, { cwd: template, stdio: 'inherit', shell: false });
   if (result.error) throw result.error;
   if (result.status !== 0) throw new Error(`Template generator failed (${result.signal || result.status}). Inspect its output before retrying.`);
   console.log('Project generated. Follow its README for local setup and independent provider configuration.');

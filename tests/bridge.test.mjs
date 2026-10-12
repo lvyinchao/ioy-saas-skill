@@ -71,3 +71,11 @@ test('outdated templates and unsupported email adapters fail with actionable dia
   const f=fixture(t);fs.writeFileSync(path.join(f.template,'release-manifest.json'),JSON.stringify({version:'1.2.1'}));
   const old=f.run('--check');assert.notEqual(old.status,0);assert.match(old.stderr,/1.3.0/);
 });
+
+test('1.4 template delegates through the shared coordinator in template cwd', t => {
+  const f = fixture(t);
+  fs.writeFileSync(path.join(f.template,'scripts/ioy.mjs'), `import fs from 'node:fs'; import path from 'node:path'; const args=process.argv.slice(2); if(args[0]!=='create')process.exit(3); const out=args[args.indexOf('--out')+1]; fs.mkdirSync(out,{recursive:true});fs.writeFileSync(path.join(out,'coordinator.json'),JSON.stringify({cwd:process.cwd(),config:args[args.indexOf('--config')+1]}));`);
+  const result=f.run('--config',f.config,'--out',f.output);
+  assert.equal(result.status,0,result.stderr);
+  assert.deepEqual(JSON.parse(fs.readFileSync(path.join(f.output,'coordinator.json'))),{cwd:fs.realpathSync(f.template),config:f.config});
+});
