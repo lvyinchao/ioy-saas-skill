@@ -1,0 +1,14 @@
+{
+  "name": "ioy-saas-marketplace",
+  "description": "Build independent Cloudflare AI SaaS products with the ioy template",
+  "owner": {
+    "name": "lvyinchao"
+  },
+  "plugins": [
+    {
+      "name": "ioy-saas",
+      "source": "./skills/ioy-saas",
+      "description": "Build an independent Cloudflare AI SaaS from an authorized local ioy template"
+    }
+  ]
+}

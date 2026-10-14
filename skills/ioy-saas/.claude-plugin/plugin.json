@@ -1,0 +1,11 @@
+{
+  "name": "ioy-saas",
+  "version": "1.5.0",
+  "description": "Build an independent Cloudflare AI SaaS from an authorized local ioy template",
+  "skills": [
+    {
+      "name": "ioy-saas",
+      "source": "../SKILL.md"
+    }
+  ]
+}
