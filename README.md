@@ -1,6 +1,10 @@
 # ioy SaaS Skill
 
+[![skills.sh](https://skills.sh/b/lvyinchao/ioy-saas-skill)](https://skills.sh/lvyinchao/ioy-saas-skill)
+
 An Agent Skill for building an independent Cloudflare AI SaaS using [ioy.ai](https://ioy.ai). Includes an eight-part intake, asset specifications, launch checks, and a bridge to the template's project generator.
+
+**The starter template is free after signing in at [https://ioy.ai](https://ioy.ai).** Sign in with your Google account to access the read-only template clone credential immediately—no payment required.
 
 **This Skill is public. The SaaS template repository remains private. Sign in to ioy.ai to get a read-only template clone credential; no GitHub account is needed.** Installing the Skill itself does not download template source. The MIT license applies only to files in this public repository; it does not relicense the template or its licensed dependencies/assets.
 
